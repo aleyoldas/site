@@ -465,16 +465,13 @@ function setupEventListeners() {
     phoneNumber.addEventListener("input", (e) => {
       let value = e.target.value.replace(/\D/g, "")
       if (value.length > 8) {
-        // 7'den 8'e değiştir
-        value = value.substring(0, 8) // 7'den 8'e değiştir
+        value = value.substring(0, 8) // 8 rakam maksimum
       }
-      // Format as XXX XX XXX (son kısım 3 rakam olacak)
-      if (value.length > 3) {
-        if (value.length > 5) {
-          value = value.substring(0, 3) + " " + value.substring(3, 5) + " " + value.substring(5)
-        } else {
-          value = value.substring(0, 3) + " " + value.substring(3)
-        }
+      // Format as XXX XX XXX (3-2-3 format)
+      if (value.length > 5) {
+        value = value.substring(0, 3) + " " + value.substring(3, 5) + " " + value.substring(5)
+      } else if (value.length > 3) {
+        value = value.substring(0, 3) + " " + value.substring(3)
       }
       e.target.value = value
     })
