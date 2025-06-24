@@ -1246,3 +1246,115 @@ body {
         margin-top: 8px;
     }
 }
+
+/* Specifications Section Styles */
+.specifications-section {
+    background: #f8f9fa;
+    padding: 60px 0;
+    margin-top: 40px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.specs-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 50px;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.spec-category {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spec-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.spec-category h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+}
+
+.spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    font-weight: 500;
+    color: #7f8c8d;
+    min-width: 120px;
+    flex-shrink: 0;
+}
+
+.spec-value {
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: right;
+    flex: 1;
+}
+
+/* Responsive Design for Specs */
+@media (max-width: 768px) {
+    .specifications-section {
+        padding: 40px 0;
+    }
+    
+    .specs-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .spec-category {
+        padding: 20px;
+    }
+    
+    .spec-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .spec-value {
+        text-align: left;
+    }
+}
