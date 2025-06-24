@@ -79,7 +79,7 @@ function setupEventListeners() {
         phoneNumber.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 7) {
-                value = value.substring(0, 7);
+                value = value.substring(0, 8);
             }
             // Format as XXX XX XX
             if (value.length > 3) {
