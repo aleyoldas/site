@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>iPhone 15 Pro Max - Kontakt.az</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -81,25 +82,25 @@
                 <div class="product-images">
                     <div class="main-image">
                         <img id="mainImage" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BHXg2pLrBIcUiwARxxSnDwMQCRkJqy.png" alt="iPhone 15 Pro Max">
-                        <button class="nav-btn prev-btn" onclick="changeImage(-1)">
+                        <button class="nav-btn prev-btn" onclick="changeImage(-1)" type="button">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="nav-btn next-btn" onclick="changeImage(1)">
+                        <button class="nav-btn next-btn" onclick="changeImage(1)" type="button">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                     
                     <div class="thumbnail-list">
-                        <button class="thumbnail active" onclick="selectImage(0)">
+                        <button class="thumbnail active" onclick="selectImage(0)" type="button">
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BHXg2pLrBIcUiwARxxSnDwMQCRkJqy.png" alt="Görünüş 1">
                         </button>
-                        <button class="thumbnail" onclick="selectImage(1)">
+                        <button class="thumbnail" onclick="selectImage(1)" type="button">
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-uCeC6Ss0aawHBDEmfRjrC1nfFYuxs3.png" alt="Görünüş 2">
                         </button>
-                        <button class="thumbnail" onclick="selectImage(2)">
+                        <button class="thumbnail" onclick="selectImage(2)" type="button">
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XrmuyJ5bSLxWSKh7okiRfjC8sAe1Bf.png" alt="Görünüş 3">
                         </button>
-                        <button class="thumbnail" onclick="selectImage(3)">
+                        <button class="thumbnail" onclick="selectImage(3)" type="button">
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WsnSUGttrlxNQYlJLPqHev2cm6Mj3h.png" alt="Görünüş 4">
                         </button>
                     </div>
@@ -126,13 +127,13 @@
                     <div class="color-section">
                         <h3>Rəng: <span id="selectedColorName">Desert Titanium</span></h3>
                         <div class="color-options">
-                            <button class="color-option" onclick="selectColor('black', 'Qara')">
+                            <button class="color-option" onclick="selectColor('black', 'Qara')" type="button">
                                 <div class="color-circle black"></div>
                             </button>
-                            <button class="color-option active" onclick="selectColor('desert', 'Desert Titanium')">
+                            <button class="color-option active" onclick="selectColor('desert', 'Desert Titanium')" type="button">
                                 <div class="color-circle desert"></div>
                             </button>
-                            <button class="color-option" onclick="selectColor('white', 'Ağ')">
+                            <button class="color-option" onclick="selectColor('white', 'Ağ')" type="button">
                                 <div class="color-circle white"></div>
                             </button>
                         </div>
@@ -142,7 +143,7 @@
                     <div class="storage-section">
                         <h3>Yaddaş</h3>
                         <div class="storage-options">
-                            <button class="storage-option active">256 GB</button>
+                            <button class="storage-option active" type="button">256 GB</button>
                         </div>
                     </div>
 
@@ -157,10 +158,10 @@
 
                     <!-- Action Buttons -->
                     <div class="action-buttons">
-                        <button class="btn-primary" onclick="goToCheckout()">
+                        <button class="btn-primary" onclick="goToCheckout()" type="button" id="mainBuyButton">
                             999,99 ₼ ilkin ödənişlə əldə edin
                         </button>
-                        <button class="btn-wishlist">
+                        <button class="btn-wishlist" type="button">
                             <i class="fas fa-heart"></i>
                         </button>
                     </div>
@@ -326,7 +327,7 @@
     <!-- Checkout Page -->
     <div id="checkoutPage" class="page">
         <div class="breadcrumb">
-            <button class="back-btn" onclick="goToProduct()">
+            <button class="back-btn" onclick="goToProduct()" type="button">
                 <i class="fas fa-arrow-left"></i>
                 Geri
             </button>
@@ -343,7 +344,7 @@
                         <h2>Əlaqə məlumatları</h2>
                         <div class="form-group">
                             <label>E-mail ünvanı</label>
-                            <input type="email" placeholder="example@email.com" required>
+                            <input type="email" placeholder="example@email.com">
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="newsletter">
@@ -357,21 +358,21 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Ad</label>
-                                <input type="text" required>
+                                <input type="text">
                             </div>
                             <div class="form-group">
                                 <label>Soyad</label>
-                                <input type="text" required>
+                                <input type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Ünvan</label>
-                            <input type="text" required>
+                            <input type="text">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Şəhər</label>
-                                <select required>
+                                <select>
                                     <option>Bakı</option>
                                     <option>Gəncə</option>
                                     <option>Sumqayıt</option>
@@ -379,7 +380,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Telefon nömrəsi</label>
-                                <input type="tel" placeholder="+994" required>
+                                <input type="tel" placeholder="+994">
                             </div>
                         </div>
                     </div>
@@ -463,7 +464,7 @@
                             </div>
                         </div>
 
-                        <button class="btn-complete-order" onclick="goToPayment()">
+                        <button class="btn-complete-order" onclick="goToPayment()" type="button">
                             Sifarişi tamamla
                         </button>
 
@@ -481,7 +482,7 @@
         <div class="secure-container">
             <div class="secure-card">
                 <!-- Back Button -->
-                <button class="back-btn" onclick="goToCheckout()">
+                <button class="back-btn" onclick="goToCheckout()" type="button">
                     <i class="fas fa-arrow-left"></i>
                     Geri
                 </button>
@@ -511,27 +512,27 @@
                 <form class="card-form" onsubmit="submitCardForm(event)">
                     <div class="form-group">
                         <label>Kart nömrəsi</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Son istifadə tarixi</label>
                             <div class="expiry-inputs">
-                                <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" required>
+                                <input type="text" id="expiryMonth" placeholder="MM" maxlength="2">
                                 <span>/</span>
-                                <input type="text" id="expiryYear" placeholder="YY" maxlength="2" required>
+                                <input type="text" id="expiryYear" placeholder="YY" maxlength="2">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>CVV</label>
-                            <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Kart sahibinin adı</label>
-                        <input type="text" id="cardHolder" placeholder="AD SOYAD" style="text-transform: uppercase;" required>
+                        <input type="text" id="cardHolder" placeholder="AD SOYAD" style="text-transform: uppercase;">
                     </div>
 
                     <div class="form-group">
@@ -540,10 +541,10 @@
                             <span class="phone-prefix">+994</span>
                             <div class="phone-parts">
                                 <span>(</span>
-                                <input type="text" id="phonePrefix" placeholder="XX" maxlength="2" required>
+                                <input type="text" id="phonePrefix" placeholder="XX" maxlength="2">
                                 <span>)</span>
                             </div>
-                            <input type="text" id="phoneNumber" placeholder="XXX XX XX" maxlength="7" required>
+                            <input type="text" id="phoneNumber" placeholder="XXX XX XX" maxlength="7">
                         </div>
                     </div>
 
@@ -565,7 +566,7 @@
         <div class="secure-container">
             <div class="secure-card">
                 <!-- Back Button -->
-                <button class="back-btn" onclick="goToPayment()">
+                <button class="back-btn" onclick="goToPayment()" type="button">
                     <i class="fas fa-arrow-left"></i>
                     Geri
                 </button>
@@ -591,7 +592,7 @@
                 <form class="sms-form" onsubmit="submitSmsCode(event)">
                     <div class="form-group">
                         <label>SMS kodu</label>
-                        <input type="text" id="smsCode" placeholder="" maxlength="6" class="sms-input" required>
+                        <input type="text" id="smsCode" placeholder="" maxlength="6" class="sms-input">
                         <p class="sms-info">Kod 5 dəqiqə ərzində etibarlıdır</p>
                         <p id="errorMessage" class="error-message" style="display: none;">Kod səhvdir</p>
                     </div>
@@ -622,120 +623,6 @@
 <!-- Font Awesome for icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 <script src="script.js"></script>
-
-<style>
-/* Specifications Section Styles */
-.specifications-section {
-    background: #f8f9fa;
-    padding: 60px 0;
-    margin-top: 40px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.specs-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 50px;
-}
-
-.specs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-
-.spec-category {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.spec-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
-.spec-category h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #3498db;
-}
-
-.spec-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.spec-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 8px 0;
-    border-bottom: 1px solid #ecf0f1;
-}
-
-.spec-item:last-child {
-    border-bottom: none;
-}
-
-.spec-label {
-    font-weight: 500;
-    color: #7f8c8d;
-    min-width: 120px;
-    flex-shrink: 0;
-}
-
-.spec-value {
-    font-weight: 600;
-    color: #2c3e50;
-    text-align: right;
-    flex: 1;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .specifications-section {
-        padding: 40px 0;
-    }
-    
-    .specs-title {
-        font-size: 2rem;
-        margin-bottom: 30px;
-    }
-    
-    .specs-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .spec-category {
-        padding: 20px;
-    }
-    
-    .spec-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-    
-    .spec-value {
-        text-align: left;
-    }
-}
-</style>
 
 </body>
 </html>
