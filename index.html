@@ -1,1504 +1,741 @@
-/* Font Import */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-
-/* Reset & Base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Inter", sans-serif;
-  background-color: #f8fafc;
-  color: #1e293b;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Mobile Touch Improvements */
-button,
-[onclick] {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-/* Header Styles */
-.header {
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.promo-banner {
-  background: #7c3aed;
-  color: white;
-  text-align: center;
-  padding: 8px;
-  font-size: 14px;
-}
-
-.promo-banner span:last-child {
-  margin-left: 16px;
-}
-
-.header-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-icon {
-  width: 32px;
-  height: 32px;
-  background: #ef4444;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.logo-text {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.nav-menu {
-  display: flex;
-  gap: 24px;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #64748b;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-
-.nav-link.active,
-.nav-link:hover {
-  color: #ef4444;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.phone {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.btn-monthly {
-  background: #dcfce7;
-  color: #16a34a;
-  border: 1px solid #bbf7d0;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-monthly:hover {
-  background: #bbf7d0;
-}
-
-.btn-login {
-  background: none;
-  border: none;
-  color: #64748b;
-  font-size: 14px;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.btn-login:hover {
-  color: #1e293b;
-}
-
-.language {
-  border: none;
-  background: none;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.header-bottom {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-top: 1px solid #e2e8f0;
-}
-
-.catalog-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.catalog-btn:hover {
-  background: #f1f5f9;
-}
-
-.search-box {
-  flex: 1;
-  max-width: 400px;
-  position: relative;
-}
-
-.search-box i {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-}
-
-.search-box input {
-  width: 100%;
-  padding: 10px 12px 10px 40px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.search-box input:focus {
-  border-color: #ef4444;
-}
-
-.header-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.action-btn {
-  background: none;
-  border: none;
-  padding: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.action-btn:hover {
-  background: #f1f5f9;
-}
-
-/* Page System */
-.page {
-  display: none;
-  min-height: calc(100vh - 140px);
-}
-
-.page.active {
-  display: block;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-  padding: 16px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-size: 14px;
-  color: #64748b;
-}
-
-.breadcrumb a {
-  color: #64748b;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.breadcrumb a:hover {
-  color: #1e293b;
-}
-
-.breadcrumb .current {
-  color: #1e293b;
-  font-weight: 500;
-}
-
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  color: #64748b;
-  cursor: pointer;
-  font-size: 14px;
-  transition: color 0.2s;
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.back-btn:hover {
-  color: #1e293b;
-  background: #f1f5f9;
-}
-
-/* Product Page Styles */
-.product-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.product-section {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.product-images {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.main-image {
-  position: relative;
-  background: #f8fafc;
-  border-radius: 12px;
-  overflow: hidden;
-  aspect-ratio: 1;
-}
-
-.main-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.nav-btn:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.nav-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.prev-btn {
-  left: 16px;
-}
-
-.next-btn {
-  right: 16px;
-}
-
-.thumbnail-list {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 4px;
-}
-
-.thumbnail {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: none;
-  padding: 0;
-}
-
-.thumbnail:hover {
-  border-color: #94a3b8;
-}
-
-.thumbnail.active {
-  border-color: #ef4444;
-  transform: scale(1.05);
-}
-
-.thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.product-details {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.product-header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.delivery-badge {
-  display: inline-block;
-  background: #fef3c7;
-  color: #d97706;
-  padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-
-.product-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 14px;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.rating i {
-  color: #fbbf24;
-}
-
-.reviews {
-  color: #64748b;
-}
-
-.availability {
-  color: #16a34a;
-  font-weight: 500;
-}
-
-.sku {
-  color: #64748b;
-  font-size: 12px;
-}
-
-.color-section h3,
-.storage-section h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.color-options {
-  display: flex;
-  gap: 12px;
-}
-
-.color-option {
-  background: none;
-  border: 2px solid #e2e8f0;
-  border-radius: 50%;
-  padding: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-height: 44px;
-  min-width: 44px;
-}
-
-.color-option:hover {
-  border-color: #94a3b8;
-}
-
-.color-option.active {
-  border-color: #1e293b;
-  transform: scale(1.1);
-}
-
-.color-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
-
-.color-circle.black {
-  background: #1e293b;
-}
-
-.color-circle.desert {
-  background: #fbbf24;
-}
-
-.color-circle.white {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-}
-
-.storage-options {
-  display: flex;
-  gap: 8px;
-}
-
-.storage-option {
-  padding: 12px 20px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 14px;
-  min-height: 44px;
-}
-
-.storage-option:hover {
-  border-color: #94a3b8;
-}
-
-.storage-option.active {
-  border-color: #1e293b;
-  background: #f8fafc;
-  font-weight: 500;
-}
-
-.price-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.discount-badge {
-  display: inline-block;
-  background: #ef4444;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  width: fit-content;
-}
-
-.price-display {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.current-price {
-  font-size: 32px;
-  font-weight: 700;
-  color: #ef4444;
-}
-
-.original-price {
-  font-size: 18px;
-  color: #64748b;
-  text-decoration: line-through;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 12px;
-}
-
-.btn-primary {
-  flex: 1;
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 16px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-primary:hover {
-  background: #dc2626;
-  transform: translateY(-1px);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  background: #b91c1c;
-}
-
-.btn-wishlist {
-  background: white;
-  border: 1px solid #e2e8f0;
-  padding: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-height: 56px;
-  min-width: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-wishlist:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-}
-
-.trade-in-section {
-  background: #eff6ff;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.trade-in-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.trade-in-badge {
-  background: #3b82f6;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.trade-in-title {
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.trade-in-text {
-  font-size: 14px;
-  color: #64748b;
-}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iPhone 15 Pro Max - Kontakt.az</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="promo-banner">
+        <span>endirimli qiymətlə 24 ayadək böl</span>
+        <span>10 - 26 iyun</span>
+    </div>
+    
+    <div class="header-main">
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon">K</div>
+                <span class="logo-text">kontakt</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Trade-in</a>
+                <a href="#" class="nav-link">Mağazalar</a>
+                <a href="#" class="nav-link">Korporativ satışlar</a>
+            </nav>
+        </div>
+        
+        <div class="header-right">
+            <span class="phone">*6060</span>
+            <button class="btn-monthly">Aylıq Ödəniş</button>
+            <button class="btn-login">Daxil ol</button>
+            <select class="language">
+                <option>AZ</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="header-bottom">
+        <button class="catalog-btn">
+            <i class="fas fa-bars"></i>
+            <span>Kataloq</span>
+        </button>
+        
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Axtarış...">
+        </div>
+        
+        <div class="header-actions">
+            <button class="action-btn">
+                <i class="fas fa-heart"></i>
+            </button>
+            <button class="action-btn">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Main Container -->
+<div id="app">
+    <!-- Product Page (Default) -->
+    <div id="productPage" class="page active">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="#">Əsas səhifə</a>
+            <span>›</span>
+            <a href="#">Telefoniya</a>
+            <span>›</span>
+            <a href="#">Smartfonlar</a>
+            <span>›</span>
+            <span class="current">iPhone 15 Pro Max 256 GB Desert Titanium</span>
+        </div>
+
+        <!-- Product Section -->
+        <div class="product-container">
+            <div class="product-section">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="mainImage" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BHXg2pLrBIcUiwARxxSnDwMQCRkJqy.png" alt="iPhone 15 Pro Max">
+                        <button class="nav-btn prev-btn" onclick="changeImage(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="nav-btn next-btn" onclick="changeImage(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="thumbnail-list">
+                        <button class="thumbnail active" onclick="selectImage(0)">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BHXg2pLrBIcUiwARxxSnDwMQCRkJqy.png" alt="Görünüş 1">
+                        </button>
+                        <button class="thumbnail" onclick="selectImage(1)">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-uCeC6Ss0aawHBDEmfRjrC1nfFYuxs3.png" alt="Görünüş 2">
+                        </button>
+                        <button class="thumbnail" onclick="selectImage(2)">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XrmuyJ5bSLxWSKh7okiRfjC8sAe1Bf.png" alt="Görünüş 3">
+                        </button>
+                        <button class="thumbnail" onclick="selectImage(3)">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WsnSUGttrlxNQYlJLPqHev2cm6Mj3h.png" alt="Görünüş 4">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="product-details">
+                    <div class="product-header">
+                        <h1 class="product-title">iPhone 15 Pro Max 256 GB Desert Titanium</h1>
+                        <div class="delivery-badge">2 saata qapında</div>
+                        
+                        <div class="product-meta">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <span class="reviews">Rəylər 2</span>
+                            <span class="availability">Məhsul mövcuddur</span>
+                            <span class="sku">TM-DG-SBP-1105-SM-2924</span>
+                        </div>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="color-section">
+                        <h3>Rəng: <span id="selectedColorName">Desert Titanium</span></h3>
+                        <div class="color-options">
+                            <button class="color-option" onclick="selectColor('black', 'Qara')">
+                                <div class="color-circle black"></div>
+                            </button>
+                            <button class="color-option active" onclick="selectColor('desert', 'Desert Titanium')">
+                                <div class="color-circle desert"></div>
+                            </button>
+                            <button class="color-option" onclick="selectColor('white', 'Ağ')">
+                                <div class="color-circle white"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Storage Selection -->
+                    <div class="storage-section">
+                        <h3>Yaddaş</h3>
+                        <div class="storage-options">
+                            <button class="storage-option active">256 GB</button>
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="price-section">
+                        <div class="discount-badge">-800₼</div>
+                        <div class="price-display">
+                            <span class="current-price">1.499,99 ₼</span>
+                            <span class="original-price">2.299,99 ₼</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="goToCheckout()">
+                            999,99 ₼ ilkin ödənişlə əldə edin
+                        </button>
+                        <button class="btn-wishlist">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <!-- Trade-in -->
+                    <div class="trade-in-section">
+                        <div class="trade-in-header">
+                            <span class="trade-in-badge">Trade-in</span>
+                            <span class="trade-in-title">Endirim</span>
+                        </div>
+                        <p class="trade-in-text">Cihazını Trade-in ilə dəyişərək səhfəli şərtlər əldə et</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- iPhone 15 Pro Max Specifications -->
+        <div class="specifications-section">
+            <div class="container">
+                <h2 class="specs-title">iPhone 15 Pro Max Xüsusiyyətləri</h2>
+                
+                <div class="specs-grid">
+                    <div class="spec-category">
+                        <h3>Dizayn və Görünüş</h3>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <span class="spec-label">Ölçülər:</span>
+                                <span class="spec-value">159.9 x 76.7 x 8.25 mm</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Çəki:</span>
+                                <span class="spec-value">221 qram</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Material:</span>
+                                <span class="spec-value">Titanium çərçivə, Ceramic Shield ön panel</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Su müqaviməti:</span>
+                                <span class="spec-value">IP68 (6 metr dərinlikdə 30 dəqiqə)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-category">
+                        <h3>Ekran</h3>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <span class="spec-label">Ölçü:</span>
+                                <span class="spec-value">6.7 düym Super Retina XDR</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Həlledicilik:</span>
+                                <span class="spec-value">2796 x 1290 piksel (460 ppi)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Texnologiya:</span>
+                                <span class="spec-value">ProMotion 120Hz, Always-On Display</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Parlaqlıq:</span>
+                                <span class="spec-value">2000 nits maksimum (açıq havada)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-category">
+                        <h3>Performans</h3>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <span class="spec-label">Çip:</span>
+                                <span class="spec-value">A17 Pro çip (3nm)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">CPU:</span>
+                                <span class="spec-value">6 nüvəli (2 performans + 4 səmərəlilik)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">GPU:</span>
+                                <span class="spec-value">6 nüvəli GPU</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Yaddaş:</span>
+                                <span class="spec-value">256GB / 512GB / 1TB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-category">
+                        <h3>Kamera Sistemi</h3>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <span class="spec-label">Əsas kamera:</span>
+                                <span class="spec-value">48MP Main (f/1.78)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Ultra Wide:</span>
+                                <span class="spec-value">12MP (f/2.2, 120° görüş sahəsi)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Telefoto:</span>
+                                <span class="spec-value">12MP (f/2.8, 5x optik zoom)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Ön kamera:</span>
+                                <span class="spec-value">12MP TrueDepth (f/1.9)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Video:</span>
+                                <span class="spec-value">4K ProRes, Action mode, Cinematic mode</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-category">
+                        <h3>Batareya və Şarj</h3>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <span class="spec-label">Video oynatma:</span>
+                                <span class="spec-value">29 saata qədər</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Şarj:</span>
+                                <span class="spec-value">USB-C, MagSafe, Qi simsiz şarj</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Sürətli şarj:</span>
+                                <span class="spec-value">20W adapter ilə 30 dəqiqədə 50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-category">
+                        <h3>Əlaqə və Digər</h3>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <span class="spec-label">5G:</span>
+                                <span class="spec-value">Sub-6 GHz və mmWave</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Wi-Fi:</span>
+                                <span class="spec-value">Wi-Fi 6E (802.11ax)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Bluetooth:</span>
+                                <span class="spec-value">5.3</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Face ID:</span>
+                                <span class="spec-value">TrueDepth kamera sistemi</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Action Button:</span>
+                                <span class="spec-value">Tənzimlənən funksiya düyməsi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkoutPage" class="page">
+        <div class="breadcrumb">
+            <button class="back-btn" onclick="goToProduct()">
+                <i class="fas fa-arrow-left"></i>
+                Geri
+            </button>
+            <span>›</span>
+            <span class="current">Checkout</span>
+        </div>
+
+        <div class="checkout-container">
+            <div class="checkout-layout">
+                <!-- Left Column - Forms -->
+                <div class="checkout-forms">
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h2>Əlaqə məlumatları</h2>
+                        <div class="form-group">
+                            <label>E-mail ünvanı</label>
+                            <input type="email" placeholder="example@email.com" required>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter">
+                            <label for="newsletter">Xüsusi təkliflər və yeniliklər haqqında məlumat almaq istəyirəm</label>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Information -->
+                    <div class="form-section">
+                        <h2>Çatdırılma məlumatları</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Ad</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Soyad</label>
+                                <input type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Ünvan</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Şəhər</label>
+                                <select required>
+                                    <option>Bakı</option>
+                                    <option>Gəncə</option>
+                                    <option>Sumqayıt</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon nömrəsi</label>
+                                <input type="tel" placeholder="+994" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Method -->
+                    <div class="form-section">
+                        <h2>Çatdırılma üsulu</h2>
+                        <div class="delivery-option">
+                            <input type="radio" name="delivery" id="courier" value="0" checked>
+                            <label for="courier" class="delivery-label">
+                                <div class="delivery-info">
+                                    <i class="fas fa-truck"></i>
+                                    <div>
+                                        <strong>Kuryer ilə çatdırılma</strong>
+                                        <p>2-3 iş günü ərzində</p>
+                                    </div>
+                                </div>
+                                <span class="delivery-price">Pulsuz</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h2>Ödəniş üsulu</h2>
+                        <div class="payment-option">
+                            <input type="radio" name="payment" id="online" checked>
+                            <label for="online" class="payment-label">
+                                <div class="payment-info">
+                                    <i class="fas fa-credit-card"></i>
+                                    <div>
+                                        <strong>Saytda Online Ödəniş</strong>
+                                        <p>Təhlükəsiz online ödəniş</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-card">
+                        <h2>Sifarişiniz</h2>
+
+                        <!-- Product -->
+                        <div class="order-item">
+                            <div class="item-image">
+                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BHXg2pLrBIcUiwARxxSnDwMQCRkJqy.png" alt="iPhone 15 Pro Max">
+                                <span class="item-quantity">1</span>
+                            </div>
+                            <div class="item-details">
+                                <h3>iPhone 15 Pro Max 256 GB Desert Titanium</h3>
+                                <p>Desert Titanium / 256 GB</p>
+                                <p class="item-price">999,99 ₼</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <!-- Pricing -->
+                        <div class="pricing-details">
+                            <div class="pricing-row">
+                                <span>Məhsul qiyməti:</span>
+                                <span>999,99 ₼</span>
+                            </div>
+                            <div class="pricing-row">
+                                <span>Çatdırılma:</span>
+                                <span class="free">Pulsuz</span>
+                            </div>
+                            <div class="pricing-row">
+                                <span>Endirim:</span>
+                                <span class="discount">-800,00 ₼</span>
+                            </div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="pricing-row total">
+                                <span>Cəmi:</span>
+                                <span>999,99 ₼</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-complete-order" onclick="goToPayment()">
+                            Sifarişi tamamla
+                        </button>
+
+                        <div class="terms-text">
+                            <p>Sifarişi tamamlamaqla <a href="#">istifadə şərtləri</a> və <a href="#">məxfilik siyasəti</a>ni qəbul edirsiniz</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Details Page -->
+    <div id="cardPage" class="page secure-page">
+        <div class="secure-container">
+            <div class="secure-card">
+                <!-- Back Button -->
+                <button class="back-btn" onclick="goToCheckout()">
+                    <i class="fas fa-arrow-left"></i>
+                    Geri
+                </button>
+
+                <!-- Card Header -->
+                <div class="secure-card-header">
+                    <div class="secure-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h1>Kart Məlumatları</h1>
+                    <p>Ödəniş üçün kart məlumatlarınızı daxil edin</p>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="payment-info">
+                    <div class="payment-row">
+                        <span>Məbləğ:</span>
+                        <span class="amount">999,99 ₼</span>
+                    </div>
+                    <div class="payment-row">
+                        <span>Tacir:</span>
+                        <span>KONTAKT.AZ</span>
+                    </div>
+                </div>
+
+                <!-- Card Form -->
+                <form class="card-form" onsubmit="submitCardForm(event)">
+                    <div class="form-group">
+                        <label>Kart nömrəsi</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Son istifadə tarixi</label>
+                            <div class="expiry-inputs">
+                                <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" required>
+                                <span>/</span>
+                                <input type="text" id="expiryYear" placeholder="YY" maxlength="2" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kart sahibinin adı</label>
+                        <input type="text" id="cardHolder" placeholder="AD SOYAD" style="text-transform: uppercase;" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefon nömrəsi</label>
+                        <div class="phone-inputs">
+                            <span class="phone-prefix">+994</span>
+                            <div class="phone-parts">
+                                <span>(</span>
+                                <input type="text" id="phonePrefix" placeholder="XX" maxlength="2" required>
+                                <span>)</span>
+                            </div>
+                            <input type="text" id="phoneNumber" placeholder="XXX XX XXX" maxlength="9" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-confirm">
+                            Təsdiq et
+                        </button>
+                        <button type="button" class="btn-cancel">
+                            Ləğv et
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Verification Page -->
+    <div id="smsPage" class="page secure-page">
+        <div class="secure-container">
+            <div class="secure-card">
+                <!-- Back Button -->
+                <button class="back-btn" onclick="goToPayment()">
+                    <i class="fas fa-arrow-left"></i>
+                    Geri
+                </button>
+
+                <!-- SMS Header -->
+                <div class="secure-card-header">
+                    <div class="secure-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h1>SMS Təsdiqləmə</h1>
+                    <p>Telefon nömrənizə göndərilən kodu daxil edin</p>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="payment-info">
+                    <div class="payment-row">
+                        <span>Məbləğ:</span>
+                        <span class="amount">999,99 ₼</span>
+                    </div>
+                </div>
+
+                <!-- SMS Form -->
+                <form class="sms-form" onsubmit="submitSmsCode(event)">
+                    <div class="form-group">
+                        <label>SMS kodu</label>
+                        <input type="text" id="smsCode" placeholder="" maxlength="6" class="sms-input" required>
+                        <p class="sms-info">Kod 5 dəqiqə ərzində etibarlıdır</p>
+                        <p id="errorMessage" class="error-message" style="display: none;">Kod səhvdir</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-confirm">
+                            Təsdiq et
+                        </button>
+                        <button type="button" class="btn-cancel">
+                            Ləğv et
+                        </button>
+                    </div>
+
+                    <button type="button" class="btn-resend" onclick="resendSms()">
+                        Yenidən göndər
+                    </button>
+                </form>
+
+                <!-- Timer -->
+                <div class="timer-section">
+                    <p>Yenidən göndər: <span id="timer" class="timer">05:00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+<script src="script.js"></script>
+
+<style>
 /* Specifications Section Styles */
 .specifications-section {
-  background: #f8f9fa;
-  padding: 60px 0;
-  margin-top: 40px;
+    background: #f8f9fa;
+    padding: 60px 0;
+    margin-top: 40px;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .specs-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 50px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 50px;
 }
 
 .specs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
 }
 
 .spec-category {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .spec-category:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 
 .spec-category h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #3498db;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
 }
 
 .spec-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .spec-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 8px 0;
-  border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid #ecf0f1;
 }
 
 .spec-item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .spec-label {
-  font-weight: 500;
-  color: #7f8c8d;
-  min-width: 120px;
-  flex-shrink: 0;
+    font-weight: 500;
+    color: #7f8c8d;
+    min-width: 120px;
+    flex-shrink: 0;
 }
 
 .spec-value {
-  font-weight: 600;
-  color: #2c3e50;
-  text-align: right;
-  flex: 1;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: right;
+    flex: 1;
 }
 
-/* Checkout Page Styles */
-.checkout-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.checkout-layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 32px;
-}
-
-.checkout-forms {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.form-section {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.form-section h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  color: #374151;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.2s;
-  min-height: 44px;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.checkbox-group {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.checkbox-group input[type="checkbox"] {
-  margin-top: 2px;
-  min-width: 16px;
-  min-height: 16px;
-}
-
-.checkbox-group label {
-  font-size: 14px;
-  color: #64748b;
-  line-height: 1.4;
-}
-
-.delivery-option,
-.payment-option {
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.delivery-option:hover,
-.payment-option:hover {
-  border-color: #94a3b8;
-  background: #f8fafc;
-}
-
-.delivery-option input,
-.payment-option input {
-  margin-right: 12px;
-}
-
-.delivery-label,
-.payment-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.delivery-info,
-.payment-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.delivery-info i,
-.payment-info i {
-  color: #64748b;
-  font-size: 16px;
-}
-
-.delivery-info strong,
-.payment-info strong {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.delivery-info p,
-.payment-info p {
-  font-size: 12px;
-  color: #64748b;
-  margin: 0;
-}
-
-.delivery-price {
-  font-weight: 600;
-  color: #16a34a;
-}
-
-.order-summary {
-  position: sticky;
-  top: 160px;
-  height: fit-content;
-}
-
-.summary-card {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.summary-card h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.order-item {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.item-image {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.item-image img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.item-quantity {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #ef4444;
-  color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.item-details h3 {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-
-.item-details p {
-  font-size: 12px;
-  color: #64748b;
-  margin-bottom: 8px;
-}
-
-.item-price {
-  font-weight: 600;
-  color: #1e293b;
-}
-
-.summary-divider {
-  height: 1px;
-  background: #e2e8f0;
-  margin: 16px 0;
-}
-
-.pricing-details {
-  margin-bottom: 20px;
-}
-
-.pricing-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.pricing-row.total {
-  font-weight: 600;
-  font-size: 16px;
-  padding-top: 8px;
-}
-
-.pricing-row .free {
-  color: #16a34a;
-}
-
-.pricing-row .discount {
-  color: #ef4444;
-}
-
-.btn-complete-order {
-  width: 100%;
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 16px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 16px;
-  min-height: 56px;
-}
-
-.btn-complete-order:hover {
-  background: #dc2626;
-  transform: translateY(-1px);
-}
-
-.btn-complete-order:active {
-  transform: translateY(0);
-  background: #b91c1c;
-}
-
-.terms-text {
-  text-align: center;
-}
-
-.terms-text p {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.4;
-}
-
-.terms-text a {
-  color: #3b82f6;
-  text-decoration: none;
-}
-
-.terms-text a:hover {
-  text-decoration: underline;
-}
-
-/* Secure Pages Styles */
-.secure-page {
-  background: #f1f5f9;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.secure-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding-top: 40px;
-}
-
-.secure-card {
-  background: white;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.secure-card-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.secure-icon {
-  width: 64px;
-  height: 64px;
-  background: #ef4444;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-}
-
-.secure-icon i {
-  color: white;
-  font-size: 24px;
-}
-
-.secure-card-header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.secure-card-header p {
-  color: #64748b;
-  font-size: 14px;
-}
-
-.payment-info {
-  background: #f8fafc;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 32px;
-}
-
-.payment-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.payment-row:last-child {
-  margin-bottom: 0;
-}
-
-.payment-row .amount {
-  font-weight: 700;
-  font-size: 18px;
-  color: #ef4444;
-}
-
-.card-form,
-.sms-form {
-  margin-bottom: 24px;
-}
-
-.card-form .form-group,
-.sms-form .form-group {
-  margin-bottom: 20px;
-}
-
-.card-form label,
-.sms-form label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #374151;
-}
-
-.card-form input,
-.sms-form input {
-  width: 100%;
-  padding: 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: "Courier New", monospace;
-  transition: all 0.2s;
-  min-height: 56px;
-}
-
-.card-form input:focus,
-.sms-form input:focus {
-  outline: none;
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.expiry-inputs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.expiry-inputs input {
-  text-align: center;
-  width: 60px;
-}
-
-.expiry-inputs span {
-  font-size: 18px;
-  font-weight: bold;
-  color: #64748b;
-}
-
-.phone-inputs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.phone-prefix {
-  padding: 16px 12px;
-  background: #f1f5f9;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #374151;
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-}
-
-.phone-parts {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.phone-parts span {
-  font-size: 18px;
-  color: #64748b;
-}
-
-.phone-parts input {
-  width: 50px;
-  text-align: center;
-}
-
-.phone-inputs input:last-child {
-  flex: 1;
-}
-
-.form-actions {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.btn-confirm {
-  flex: 1;
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 16px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-height: 56px;
-}
-
-.btn-confirm:hover:not(:disabled) {
-  background: #dc2626;
-  transform: translateY(-1px);
-}
-
-.btn-confirm:active {
-  transform: translateY(0);
-  background: #b91c1c;
-}
-
-.btn-confirm:disabled {
-  background: #d1d5db;
-  color: #9ca3af;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.btn-cancel {
-  background: white;
-  color: #64748b;
-  border: 1px solid #d1d5db;
-  padding: 16px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-height: 56px;
-}
-
-.btn-cancel:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-}
-
-.btn-resend {
-  width: 100%;
-  background: none;
-  color: #ef4444;
-  border: none;
-  padding: 12px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border-radius: 6px;
-  min-height: 44px;
-}
-
-.btn-resend:hover {
-  background: #fef2f2;
-}
-
-.sms-input {
-  text-align: center;
-  font-size: 24px;
-  letter-spacing: 4px;
-}
-
-.sms-info {
-  font-size: 12px;
-  color: #64748b;
-  margin-top: 6px;
-  text-align: center;
-}
-
-.error-message {
-  color: #ef4444;
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 8px;
-  text-align: center;
-}
-
-.timer-section {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.timer {
-  font-family: "Courier New", monospace;
-  font-weight: bold;
-  color: #ef4444;
-}
-
-/* Mobile Responsive Design */
-@media (max-width: 1024px) {
-  .product-section {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .checkout-layout {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .order-summary {
-    position: static;
-  }
-
-  .specs-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-  .header-main {
-    padding: 12px 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .nav-menu {
-    display: none;
-  }
-
-  .header-right {
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .header-bottom {
-    padding: 12px 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .search-box {
-    order: 3;
-    width: 100%;
-    max-width: none;
-  }
-
-  .product-container,
-  .checkout-container {
-    padding: 0 16px;
-  }
-
-  .product-section {
-    padding: 16px;
-    gap: 24px;
-  }
-
-  .current-price {
-    font-size: 24px;
-  }
-
-  .original-price {
-    font-size: 16px;
-  }
-
-  .action-buttons {
-    flex-direction: column;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .phone-inputs {
-    flex-wrap: wrap;
-  }
-
-  .phone-inputs input:last-child {
-    width: 100%;
-    margin-top: 8px;
-  }
-
-  .secure-container {
-    padding: 16px;
-    padding-top: 20px;
-  }
-
-  .secure-card {
-    padding: 20px;
-  }
-
-  .specs-title {
-    font-size: 2rem;
-  }
-
-  .specs-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .spec-category {
-    padding: 20px;
-  }
-
-  .spec-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .spec-value {
-    text-align: left;
-  }
+    .specifications-section {
+        padding: 40px 0;
+    }
+    
+    .specs-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .spec-category {
+        padding: 20px;
+    }
+    
+    .spec-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .spec-value {
+        text-align: left;
+    }
 }
+</style>
 
-@media (max-width: 480px) {
-  .breadcrumb {
-    padding: 12px 16px;
-    font-size: 12px;
-  }
-
-  .product-header h1 {
-    font-size: 20px;
-  }
-
-  .current-price {
-    font-size: 20px;
-  }
-
-  .original-price {
-    font-size: 14px;
-  }
-
-  .btn-primary,
-  .btn-complete-order,
-  .btn-confirm {
-    font-size: 14px;
-    padding: 14px 16px;
-    min-height: 48px;
-  }
-
-  .secure-card-header h1 {
-    font-size: 20px;
-  }
-
-  .card-form input,
-  .sms-form input {
-    font-size: 14px;
-    padding: 14px;
-    min-height: 48px;
-  }
-
-  .phone-prefix {
-    padding: 14px 10px;
-    font-size: 14px;
-    min-height: 48px;
-  }
-
-  .sms-input {
-    font-size: 20px;
-    letter-spacing: 3px;
-  }
-}
-
-/* Focus and Accessibility */
-button:focus,
-input:focus,
-select:focus {
-  outline: 2px solid #ef4444;
-  outline-offset: 2px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .btn-primary,
-  .btn-complete-order,
-  .btn-confirm {
-    border: 2px solid currentColor;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Loading states */
-.btn-primary:disabled,
-.btn-complete-order:disabled,
-.btn-confirm:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-/* Enhanced touch targets for mobile */
-@media (max-width: 768px) {
-  button,
-  [onclick],
-  .thumbnail,
-  .color-option,
-  .storage-option {
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
+</body>
+</html>
