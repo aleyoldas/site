@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>iPhone 15 Pro Max - Kontakt.az</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- Header -->
@@ -157,7 +157,7 @@
 
                     <!-- Action Buttons -->
                     <div class="action-buttons">
-                        <button class="btn-primary" onclick="showPage('checkoutPage')">
+                        <button class="btn-primary" onclick="goToCheckout()">
                             999,99 ₼ ilkin ödənişlə əldə edin
                         </button>
                         <button class="btn-wishlist">
@@ -326,7 +326,7 @@
     <!-- Checkout Page -->
     <div id="checkoutPage" class="page">
         <div class="breadcrumb">
-            <button class="back-btn" onclick="showPage('productPage')">
+            <button class="back-btn" onclick="goToProduct()">
                 <i class="fas fa-arrow-left"></i>
                 Geri
             </button>
@@ -463,7 +463,7 @@
                             </div>
                         </div>
 
-                        <button class="btn-complete-order" onclick="showPage('cardPage')">
+                        <button class="btn-complete-order" onclick="goToPayment()">
                             Sifarişi tamamla
                         </button>
 
@@ -481,7 +481,7 @@
         <div class="secure-container">
             <div class="secure-card">
                 <!-- Back Button -->
-                <button class="back-btn" onclick="showPage('checkoutPage')">
+                <button class="back-btn" onclick="goToCheckout()">
                     <i class="fas fa-arrow-left"></i>
                     Geri
                 </button>
@@ -565,7 +565,7 @@
         <div class="secure-container">
             <div class="secure-card">
                 <!-- Back Button -->
-                <button class="back-btn" onclick="showPage('cardPage')">
+                <button class="back-btn" onclick="goToPayment()">
                     <i class="fas fa-arrow-left"></i>
                     Geri
                 </button>
@@ -621,7 +621,7 @@
 
 <!-- Font Awesome for icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-<script src="./script.js"></script>
+<script src="script.js"></script>
 
 <style>
 /* Specifications Section Styles */
