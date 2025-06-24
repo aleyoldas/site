@@ -212,7 +212,7 @@ function setupEventListeners() {
   if (phoneNumber) {
     phoneNumber.addEventListener("input", (e) => {
       let value = e.target.value.replace(/\D/g, "")
-      if (value.length > 7) {
+      if (value.length > 8) {
         value = value.substring(0, 7)
       }
       // Format as XXX XX XX
