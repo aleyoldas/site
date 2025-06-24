@@ -212,8 +212,8 @@ function setupEventListeners() {
   if (phoneNumber) {
     phoneNumber.addEventListener("input", (e) => {
       let value = e.target.value.replace(/\D/g, "")
-      if (value.length > 9) {
-        value = value.substring(0, 9)
+      if (value.length > 11) {
+        value = value.substring(0, 11)
       }
       // Format as XXX XX XX
       if (value.length > 3) {
